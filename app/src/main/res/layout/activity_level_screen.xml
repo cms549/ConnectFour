@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="Choose Difficulty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
+
+    <Button
+        android:text="Easy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/beasy"
+        android:onClick="clickEasy" />
+
+    <Button
+        android:text="Hard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bhard"
+        android:onClick="clickHard" />
+
+    <Button
+        android:text="Back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bback"
+        android:onClick="goBack" />
+</LinearLayout>
