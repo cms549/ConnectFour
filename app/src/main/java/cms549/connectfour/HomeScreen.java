@@ -31,4 +31,14 @@ public class HomeScreen extends AppCompatActivity {
         startActivityForResult(nextScreen,1);
 
     }
+
+    public void goToChooseChip(View view) {
+        //Jump to account screen
+        Intent nextScreen = new Intent(getApplicationContext(), ChooseChipScreen.class);
+
+
+        //start next screen
+        startActivityForResult(nextScreen,2);
+
+    }
 }
