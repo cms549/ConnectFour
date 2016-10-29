@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/holo_blue_light"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,6 +8,9 @@
         android:text="Choose Difficulty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textAlignment="center"
+
         android:id="@+id/textView" />
 
     <Button
@@ -14,19 +18,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/beasy"
-        android:onClick="clickEasy" />
+        android:onClick="clickEasy"
+        android:layout_marginBottom="76dp"
+        android:background="@android:color/holo_orange_light"
+        android:layout_above="@+id/bhard"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Hard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bhard"
-        android:onClick="clickHard" />
+        android:onClick="clickHard"
+        android:background="@android:color/holo_orange_light"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="Back"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bback"
-        android:onClick="goBack" />
-</LinearLayout>
+        android:onClick="goBack"
+        android:background="@android:color/holo_red_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

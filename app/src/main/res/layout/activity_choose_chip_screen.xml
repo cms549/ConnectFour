@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@android:color/holo_blue_light"
     android:layout_height="match_parent">
 
     <TextView
         android:text="Player 1, Choose Your Chip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView9" />
+        android:id="@+id/textView9"
+        android:layout_above="@+id/spchip1"
+        android:layout_alignParentStart="true"
+        android:textSize="25dp"
+        android:layout_marginBottom="76dp" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spchip1" />
+        android:id="@+id/spchip1"
+        android:layout_above="@+id/textView8"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="56dp" />
 
     <TextView
         android:text="Player 2, Choose Your Chip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView8" />
+        android:textSize="25dp"
+        android:id="@+id/textView8"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spchip2" />
+        android:id="@+id/spchip2"
+        android:layout_above="@+id/bplay"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="83dp" />
 
     <Button
         android:text="Play"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="clickPlay"
-        android:id="@+id/bplay" />
+        android:background="@android:color/holo_green_light"
+        android:id="@+id/bplay"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
-</LinearLayout>
+</RelativeLayout>
