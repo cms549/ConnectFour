@@ -43,4 +43,22 @@
         android:background="@android:color/holo_red_dark"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Choose Your Chip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvchoosechip"
+        android:textSize="25dp"
+        android:layout_below="@+id/bhard"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spchip"
+        android:layout_alignTop="@+id/tvchoosechip"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
 </RelativeLayout>

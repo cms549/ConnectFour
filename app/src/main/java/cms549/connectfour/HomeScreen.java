@@ -17,7 +17,7 @@ public class HomeScreen extends AppCompatActivity {
 
     public void goToAccount(View view) {
         SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
-        System.out.println("SIZE of pref="+myPref.getAll().keySet().size());
+
         String un= myPref.getString("username", null);
         if(un==null){
             //Jump to create account screen

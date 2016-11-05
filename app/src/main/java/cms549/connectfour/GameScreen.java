@@ -1,6 +1,7 @@
 package cms549.connectfour;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,8 +18,9 @@ public class GameScreen extends AppCompatActivity {
     GridView gvboard;
     int[][] board; //6 rows, 7 cols, 0 means empty, 1 means p1, -1 means p2
     ArrayList<Move> boardAsList;
-    int aiDif;
+    int aiDif;//if 0 then there is 2 players
     int turn;
+    int p1color,p2color;
 
 
     @Override
@@ -30,16 +32,50 @@ public class GameScreen extends AppCompatActivity {
 
         createBlankBoard();
 
+        Intent i =getIntent();
+        p1color = i.getIntExtra("chip1",-1);
+        p2color = i.getIntExtra("chip2",-1);
+        turn = 1;
+        aiDif = i.getIntExtra("aiDif",-1);
+        if(p1color==-1 || p2color==-1){
+            p1color = R.drawable.black_circle;
+            p2color=R.drawable.red_circle;
+        }
+
         gvboard.setAdapter(new BoardAdapter(this ,boardAsList ));
 
         gvboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Move m = boardAsList.get(position);
-                if(m.player==0){
-                    m.player =1;
-                    m.picID = R.drawable.red_circle;
-                    v.setBackground(getDrawable(m.picID));
+                if(aiDif>-1) {
+                    //there is a computer
+                    if(m.player==0){
+                        m.player =1;
+                        m.picID = p1color;
+                        v.setBackground(getDrawable(m.picID));
+                        //computer go
+                    }
+
+                }else{
+                    //if spot is empty
+                    if(m.player==0){
+                        if(turn==1){
+                            //player 1 goes
+                            m.player =1;
+                            m.picID = p1color;
+                            v.setBackground(getDrawable(m.picID));
+                            turn=turn*-1;
+                        }
+                        else{
+                            //player 2 goes
+                            m.player =-1;
+                            m.picID = p2color;
+                            v.setBackground(getDrawable(m.picID));
+                            turn=turn*-1;
+                        }
+                    }
                 }
+
             }
         });
     }

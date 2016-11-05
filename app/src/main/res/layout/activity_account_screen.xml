@@ -45,7 +45,7 @@
         android:id="@+id/textView4"
         android:textSize="25dp"
         android:textColor="@android:color/holo_red_dark"
-        android:layout_below="@+id/progressBar"
+        android:layout_below="@+id/tvname"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -66,17 +66,6 @@
         android:textSize="25dp"
         android:layout_below="@+id/textView3"
         android:textColor="@android:color/holo_red_dark"
-        android:layout_alignParentStart="true" />
-
-    <ProgressBar
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:max="100"
-        android:progress="10"
-        android:background="@android:color/holo_green_light"
-        android:layout_below="@+id/tvname"
         android:layout_alignParentStart="true" />
 
 
