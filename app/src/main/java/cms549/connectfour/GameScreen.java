@@ -42,8 +42,6 @@ public class GameScreen extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void createBlankBoard() {
@@ -57,7 +55,10 @@ public class GameScreen extends AppCompatActivity {
                 cnt++;
             }
         }
+    }
 
+    public void quit(View view){
+        finish();
     }
 
 

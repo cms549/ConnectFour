@@ -19,11 +19,11 @@ public class ChooseChipScreen extends AppCompatActivity {
     public void clickPlay(View view) {
         //Check that the players chips are selected
 
-
         Intent nextScreen = new Intent(getApplicationContext(), GameScreen.class);
 
         //start next screen
         startActivityForResult(nextScreen,1);
-
     }
+
+    //Result listener
 }

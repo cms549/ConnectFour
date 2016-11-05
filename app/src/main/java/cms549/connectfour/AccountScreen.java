@@ -11,20 +11,21 @@ public class AccountScreen extends AppCompatActivity {
 
     TextView tvname;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_screen);
-        loadFromPreference();
         tvname = (TextView) findViewById(R.id.tvname);
+        loadFromPreference();
     }
 
     private void loadFromPreference() {
-        SharedPreferences myPref = this.getPreferences(Context.MODE_PRIVATE);
-        String un = myPref.getString("username",null);
+        // Restore preferences
+        SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
+        String un= myPref.getString("username", null);
+
         if(un==null){
-            //never logged in
+            //never logged in should never happen
 
         }
         else{
