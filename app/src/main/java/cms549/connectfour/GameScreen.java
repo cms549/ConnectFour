@@ -11,6 +11,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameScreen extends AppCompatActivity {
 
@@ -47,37 +48,72 @@ public class GameScreen extends AppCompatActivity {
         gvboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Move m = boardAsList.get(position);
+                if(m.player!=0){
+                    return;
+                }
+                //check if space below you is not blank
+                int pos = getPositionBelow(position);
+                if(pos>=0 && boardAsList.get(pos).player==0){
+                    return;
+                }
+
                 if(aiDif>-1) {
                     //there is a computer
-                    if(m.player==0){
+                    m.player =1;
+                    m.picID = p1color;
+                    v.setBackground(getDrawable(m.picID));
+                    //computer go -> should pick between hard and easy
+                    aiEasyMakeMove();
+
+                }else{
+                    if(turn==1){
+                        //player 1 goes
                         m.player =1;
                         m.picID = p1color;
                         v.setBackground(getDrawable(m.picID));
-                        //computer go
+                        turn=turn*-1;
                     }
-
-                }else{
-                    //if spot is empty
-                    if(m.player==0){
-                        if(turn==1){
-                            //player 1 goes
-                            m.player =1;
-                            m.picID = p1color;
-                            v.setBackground(getDrawable(m.picID));
-                            turn=turn*-1;
-                        }
-                        else{
-                            //player 2 goes
-                            m.player =-1;
-                            m.picID = p2color;
-                            v.setBackground(getDrawable(m.picID));
-                            turn=turn*-1;
-                        }
+                    else{
+                        //player 2 goes
+                        m.player =-1;
+                        m.picID = p2color;
+                        v.setBackground(getDrawable(m.picID));
+                        turn=turn*-1;
                     }
                 }
 
             }
         });
+    }
+
+    private void aiEasyMakeMove() {
+        Random r = new Random();
+        int pos =38;
+        while(true){
+            pos=r.nextInt(42 - 0);
+            Move m = boardAsList.get(pos);
+            if(m.player==0){
+                int p2 = pos +7;
+                if(p2>= 42 || boardAsList.get(p2).player!=0){
+                    m.player =-1;
+                    m.picID = p2color;
+                    View v=gvboard.getChildAt(pos);
+                    v.setBackground(getDrawable(m.picID));
+                    return;
+                }
+            }
+        }
+
+    }
+
+    private int getPositionBelow(int position) {
+
+        int ans= position +7;
+        if(ans> 42){
+            return -1;
+        }
+        return ans;
+
     }
 
     private void createBlankBoard() {
