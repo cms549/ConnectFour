@@ -46,6 +46,8 @@ public class BoardAdapter extends BaseAdapter {
 
 
         } else {
+            Move m =list.get(position);
+            convertView.setBackground(context.getDrawable(m.picID));
             return convertView;
         }
     }
