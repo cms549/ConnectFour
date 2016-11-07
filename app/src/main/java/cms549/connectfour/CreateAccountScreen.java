@@ -31,6 +31,7 @@ public class CreateAccountScreen extends AppCompatActivity {
         editor.putString("username", un);
         editor.putInt("games",0);
         editor.putInt("wins",0);
+        editor.putInt("losses",0);
         editor.putInt("score",0);
         HashSet<String> tokens = new HashSet<String>(2);
         tokens.add(""+R.drawable.red_circle);

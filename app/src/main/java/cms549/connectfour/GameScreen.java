@@ -2,6 +2,7 @@ package cms549.connectfour;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 public class GameScreen extends AppCompatActivity {
@@ -179,12 +181,37 @@ public class GameScreen extends AppCompatActivity {
 
         if(i==-1){
             t.setText("You lost.");
+            SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
+            SharedPreferences.Editor editor = myPref.edit();
+            editor.putInt("games",myPref.getInt("games",0)+1);
+            editor.putInt("losses",myPref.getInt("losses",0)+1);
+            editor.commit();
         }
         if(i==0){
             t.setText("It's a Tie.");
+            SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
+            SharedPreferences.Editor editor = myPref.edit();
+            editor.putInt("games",myPref.getInt("games",0)+1);
+            editor.commit();
+
         }
         else{
             t.setText("Player "+ i+ " won!");
+
+            if(i==1) {
+                SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
+                SharedPreferences.Editor editor = myPref.edit();
+                editor.putInt("games", myPref.getInt("games", 0) + 1);
+                editor.putInt("wins", myPref.getInt("wins", 0) + 1);
+                editor.commit();
+            }
+            else{
+                SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
+                SharedPreferences.Editor editor = myPref.edit();
+                editor.putInt("games",myPref.getInt("games",0)+1);
+                editor.putInt("losses",myPref.getInt("losses",0)+1);
+                editor.commit();
+            }
         }
 
     }
