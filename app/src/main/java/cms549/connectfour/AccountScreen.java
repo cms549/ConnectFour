@@ -13,10 +13,11 @@ import java.util.Set;
 
 public class AccountScreen extends AppCompatActivity {
 
-    TextView tvname;
+    private TextView tvname;
     private TextView games;
     private TextView wins;
     private TextView score;
+    private TextView wlratio;
 
 
     @Override
@@ -27,6 +28,8 @@ public class AccountScreen extends AppCompatActivity {
         games = (TextView) findViewById(R.id.gamestv);
         wins= (TextView) findViewById(R.id.winstv);
         score= (TextView) findViewById(R.id.scoretv);
+        wlratio = (TextView) findViewById(R.id.wltv);
+
 
 
         loadFromPreference();
@@ -46,6 +49,12 @@ public class AccountScreen extends AppCompatActivity {
         games.setText(""+g);
         wins.setText(""+w);
         score.setText(""+s);
+        if(g==0){
+            wlratio.setText("-");
+            return;
+        }
+        double wl = (w+0.0)/g;
+        wlratio.setText(""+wl);
 
 
     }

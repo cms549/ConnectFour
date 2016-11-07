@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_dark"
     tools:context="cms549.connectfour.CreateAccountScreen"
     >
 
@@ -10,20 +11,33 @@
         android:text="Username:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView10" />
+        android:padding="10dp"
+        android:id="@+id/textView10"
+        android:textSize="36sp"
+        android:textColor="@android:color/white" />
 
     <EditText
         android:layout_width="match_parent"
+        android:background="@android:color/darker_gray"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:inputType="textPersonName"
         android:hint="Enter Name"
+
         android:ems="10"
-        android:id="@+id/etname" />
+        android:id="@+id/etname"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 
     <Button
         android:text="Save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:onClick="saveClicked"
-        android:id="@+id/bsave" />
+        android:id="@+id/bsave"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_red_dark"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
 </LinearLayout>
