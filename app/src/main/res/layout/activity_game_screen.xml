@@ -27,8 +27,7 @@
         android:textSize="24dp"
         android:id="@+id/tvturn"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="49dp" />
+        android:layout_above="@+id/gvboard" />
 
     <GridView
         android:layout_width="match_parent"
@@ -39,5 +38,5 @@
         android:id="@+id/gvboard"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp" />
+         />
 </RelativeLayout>

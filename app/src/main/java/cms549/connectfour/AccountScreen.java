@@ -43,7 +43,10 @@ public class AccountScreen extends AppCompatActivity {
         int w = myPref.getInt("wins",0);
         int s = myPref.getInt("score",0);
         int l= myPref.getInt("losses",0);
-        HashSet<String> tokens = (HashSet<String>) myPref.getStringSet("tokens", null);
+
+
+        String achievements =  myPref.getString("tokens", null);
+        //should just list the numbers of the tokens you have available
 
         tvname.setText(un);
         games.setText(""+g);
