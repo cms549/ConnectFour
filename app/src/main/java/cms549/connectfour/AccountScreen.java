@@ -1,15 +1,12 @@
 package cms549.connectfour;
 
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class AccountScreen extends AppCompatActivity {
 
@@ -17,7 +14,9 @@ public class AccountScreen extends AppCompatActivity {
     private TextView games;
     private TextView wins;
     private TextView score;
+    private TextView streak;
     private TextView wlratio;
+
 
 
     @Override
@@ -28,9 +27,8 @@ public class AccountScreen extends AppCompatActivity {
         games = (TextView) findViewById(R.id.gamestv);
         wins= (TextView) findViewById(R.id.winstv);
         score= (TextView) findViewById(R.id.scoretv);
+        streak = (TextView) findViewById(R.id.streaktv);
         wlratio = (TextView) findViewById(R.id.wltv);
-
-
 
         loadFromPreference();
     }
@@ -43,15 +41,14 @@ public class AccountScreen extends AppCompatActivity {
         int w = myPref.getInt("wins",0);
         int s = myPref.getInt("score",0);
         int l= myPref.getInt("losses",0);
-
-
-        String achievements =  myPref.getString("tokens", null);
-        //should just list the numbers of the tokens you have available
+        int t= myPref.getInt("ties",0);
+        int streak1 = myPref.getInt("streak",0);
 
         tvname.setText(un);
         games.setText(""+g);
-        wins.setText(""+w);
+        wins.setText(""+w+"/"+t+"/"+l);
         score.setText(""+s);
+        streak.setText(""+streak1);
         if(g==0){
             wlratio.setText("-");
             return;
@@ -64,5 +61,13 @@ public class AccountScreen extends AppCompatActivity {
 
     public void goBack(View view) {
         finish();
+    }
+
+    public void goToAchievements(View view) {
+        //Jump to create account screen
+        Intent nextScreen = new Intent(getApplicationContext(), AchievementsScreen.class);
+        //start next screen
+        startActivity(nextScreen);
+
     }
 }

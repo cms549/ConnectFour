@@ -6,10 +6,12 @@ import java.io.Serializable;
 public class Achievement implements Serializable {
 
     private String desc;
+    private String name;
     private int index;
     private int circleID;
 
-    public Achievement(String d, int ind, int dID){
+    public Achievement(String n, String d, int ind, int dID){
+        name=n;
         desc=d;
         index = ind;
         circleID = dID;
@@ -28,4 +30,7 @@ public class Achievement implements Serializable {
     }
 
 
+    public String getName() {
+        return name;
+    }
 }

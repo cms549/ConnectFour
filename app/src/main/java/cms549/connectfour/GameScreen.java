@@ -53,6 +53,7 @@ public class GameScreen extends AppCompatActivity {
         if(p1color==-1 || p2color==-1){
             p1color = R.drawable.black_circle;
             p2color=R.drawable.red_circle;
+            tvturn.setText("Player 1's Turn:");
         }
         ba = new BoardAdapter(this ,boardAsList );
         gvboard.setAdapter(ba);
@@ -89,6 +90,7 @@ public class GameScreen extends AppCompatActivity {
                         m.picID = p1color;
                         v.setBackground(getDrawable(m.picID));
                         movesMade++;
+                        tvturn.setText("Player 2's Turn:");
                         if(didWin(m)){
                             playerWins(1);
                         }
@@ -100,6 +102,7 @@ public class GameScreen extends AppCompatActivity {
                         m.picID = p2color;
                         v.setBackground(getDrawable(m.picID));
                         movesMade++;
+                        tvturn.setText("Player 1's Turn:");
                         if(didWin(m)){
                             playerWins(2);
                         }
@@ -178,38 +181,145 @@ public class GameScreen extends AppCompatActivity {
                 quit(null);
             }
         });
+        SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
+        SharedPreferences.Editor editor = myPref.edit();
+        String ach = myPref.getString("achievements","");
 
         if(i==-1){
             t.setText("You lost.");
-            SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
-            SharedPreferences.Editor editor = myPref.edit();
             editor.putInt("games",myPref.getInt("games",0)+1);
             editor.putInt("losses",myPref.getInt("losses",0)+1);
+            int sc = myPref.getInt("score",0)+1;
+            editor.putInt("score",sc);
+            //50points
+            if(sc>=50 && !ach.contains("4") ){
+                ach= ach+"4";
+                editor.putString("achievements", ach);
+            }
+            //1k points
+            else if(sc>=1000 && !ach.contains("5") ){
+                ach= ach+"5";
+                editor.putString("achievements", ach);
+            }
+            int st = myPref.getInt("streak",0);
+            if(st<0){
+                editor.putInt("streak",st-1);
+                if(st-1==-10){
+                    //Loosing streak
+                    if(!ach.contains("6")){
+                        ach= ach+"6";
+                        editor.putString("achievements", ach);
+                    }
+                }
+            }
+            else{
+                editor.putInt("streak",0);
+            }
+
             editor.commit();
         }
         if(i==0){
             t.setText("It's a Tie.");
-            SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
-            SharedPreferences.Editor editor = myPref.edit();
             editor.putInt("games",myPref.getInt("games",0)+1);
+            editor.putInt("ties",myPref.getInt("ties",0)+1);
+            int sc = myPref.getInt("score",0)+2;
+            editor.putInt("score",sc);
+            //50points
+            if(sc>=50 && !ach.contains("4") ){
+                ach= ach+"4";
+                editor.putString("achievements", ach);
+            }
+            //1k points
+            else if(sc>=1000 && !ach.contains("5") ){
+                ach= ach+"5";
+                editor.putString("achievements", ach);
+            }
+            editor.putInt("streak",0);
+
+
             editor.commit();
 
         }
         else{
             t.setText("Player "+ i+ " won!");
-
             if(i==1) {
-                SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
-                SharedPreferences.Editor editor = myPref.edit();
+                //won against pc
+                if(aiDif >0){
+                    if(!ach.contains("1")){
+                        ach= ach+"1";
+                        editor.putString("achievements", ach);
+                    }
+                }
+                //won against friend
+                else{
+                    if(!ach.contains("3")){
+                        ach= ach+"3";
+                        editor.putString("achievements", ach);
+                    }
+                }
+
                 editor.putInt("games", myPref.getInt("games", 0) + 1);
                 editor.putInt("wins", myPref.getInt("wins", 0) + 1);
+                int sc = myPref.getInt("score",0)+5;
+                editor.putInt("score",sc);
+                //50points
+                if(sc>=50 && !ach.contains("4") ){
+                    ach= ach+"4";
+                    editor.putString("achievements", ach);
+                }
+                //1k points
+                else if(sc>=1000 && !ach.contains("5") ){
+                    ach= ach+"5";
+                    editor.putString("achievements", ach);
+                }
+
+                int st = myPref.getInt("streak",0);
+                if(st>0){
+                    editor.putInt("streak",st+1);
+                    if(st+1==10){
+                        //Winning streak
+                        if(!ach.contains("7")){
+                            ach= ach+"7";
+                            editor.putString("achievements", ach);
+                        }
+                    }
+                }
+                else{
+                    editor.putInt("streak",0);
+                }
                 editor.commit();
             }
             else{
-                SharedPreferences myPref = getSharedPreferences("UserInfo", 0);
-                SharedPreferences.Editor editor = myPref.edit();
+                //lost against friend
                 editor.putInt("games",myPref.getInt("games",0)+1);
                 editor.putInt("losses",myPref.getInt("losses",0)+1);
+                int sc = myPref.getInt("score",0)+1;
+                editor.putInt("score",sc);
+                //50points
+                if(sc>=50 && !ach.contains("4") ){
+                    ach= ach+"4";
+                    editor.putString("achievements", ach);
+                }
+                //1k points
+                else if(sc>=1000 && !ach.contains("5") ){
+                    ach= ach+"5";
+                    editor.putString("achievements", ach);
+                }
+                int st = myPref.getInt("streak",0);
+                if(st<0){
+                    editor.putInt("streak",st-1);
+                    if(st-1==-10){
+                        //Loosing streak
+                        if(!ach.contains("6")){
+                            ach= ach+"6";
+                            editor.putString("achievements", ach);
+                        }
+                    }
+                }
+                else{
+                    editor.putInt("streak",0);
+                }
+
                 editor.commit();
             }
         }

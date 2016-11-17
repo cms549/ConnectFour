@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AccountScreen"></activity>
+        <activity android:name=".AchievementsScreen"></activity>
         <activity android:name=".CreateAccountScreen"></activity>
         <activity android:name=".ChooseChipScreen"></activity>
         <activity android:name=".ChooseLevelScreen"></activity>
