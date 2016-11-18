@@ -74,6 +74,7 @@ public class GameScreen extends AppCompatActivity {
 
                 if(aiDif>-1) {
                     //there is a computer
+                    board[m.row][m.col] = 1;
                     m.player =1;
                     m.picID = p1color;
                     v.setBackground(getDrawable(m.picID));
@@ -83,7 +84,12 @@ public class GameScreen extends AppCompatActivity {
                     }
 
                     //computer go -> should pick between hard and easy
-                    aiEasyMakeMove();
+                    if(aiDif==1) {
+                        aiEasyMakeMove();
+                    }
+                    else{
+                        aiHardMakeMove();
+                    }
                     movesMade++;
 
                 }else{
@@ -120,6 +126,21 @@ public class GameScreen extends AppCompatActivity {
         });
     }
 
+    private void aiHardMakeMove() {
+        int pos = HardAI.makemove(board);
+        Move m = boardAsList.get(pos);
+        board[m.row][m.col] = -1;
+        m.player =-1;
+        m.picID = p2color;
+        View v=gvboard.getChildAt(pos);
+        v.setBackground(getDrawable(m.picID));
+        if(didWin(m)){
+            playerWins(-1);
+        }
+        return;
+
+    }
+
     private void aiEasyMakeMove() {
         Random r = new Random();
         int pos =38;
@@ -131,6 +152,7 @@ public class GameScreen extends AppCompatActivity {
                 //check row below it
                 if(p2>= 42 || boardAsList.get(p2).player!=0){
                     m.player =-1;
+                    board[m.row][m.col] = -1;
                     m.picID = p2color;
                     View v=gvboard.getChildAt(pos);
                     v.setBackground(getDrawable(m.picID));
