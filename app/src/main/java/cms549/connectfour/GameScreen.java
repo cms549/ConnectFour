@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,6 +65,7 @@ public class GameScreen extends AppCompatActivity {
                 if(m.player!=0){
                     return;
                 }
+
                 //check if space below you is not blank
                 int pos = getPositionBelow(position);
                 if(pos>=0 && boardAsList.get(pos).player==0){
@@ -79,6 +81,7 @@ public class GameScreen extends AppCompatActivity {
                     if(didWin(m)){
                         playerWins(1);
                     }
+
                     //computer go -> should pick between hard and easy
                     aiEasyMakeMove();
                     movesMade++;
@@ -125,6 +128,7 @@ public class GameScreen extends AppCompatActivity {
             Move m = boardAsList.get(pos);
             if(m.player==0){
                 int p2 = pos +7;
+                //check row below it
                 if(p2>= 42 || boardAsList.get(p2).player!=0){
                     m.player =-1;
                     m.picID = p2color;
@@ -355,6 +359,7 @@ public class GameScreen extends AppCompatActivity {
         int right=0,left=0, up=0,down=0, ur=0,dl=0,ul=0,dr=0;
         int oldpos = m.position;
         int newpos = oldpos+1;
+
         //count right -> while you are on the same row
         while(newpos/7 == oldpos/7){
             if(boardAsList.get(newpos).player==player){
@@ -409,7 +414,7 @@ public class GameScreen extends AppCompatActivity {
             else{
                 break;
             }
-            newpos = oldpos-8;
+            newpos = newpos-8;
         }
 
         //ur= count up and to the right -> until you hit top row or right most column
@@ -421,7 +426,7 @@ public class GameScreen extends AppCompatActivity {
             else{
                 break;
             }
-            newpos = oldpos-6;
+            newpos = newpos-6;
         }
 
         //dr= count down and to the right -> until you hit last row or right most column
@@ -433,7 +438,7 @@ public class GameScreen extends AppCompatActivity {
             else{
                 break;
             }
-            newpos = oldpos+8;
+            newpos = newpos+8;
         }
 
         //dl
@@ -445,7 +450,7 @@ public class GameScreen extends AppCompatActivity {
             else{
                 break;
             }
-            newpos = oldpos+6;
+            newpos = newpos+6;
         }
 
         //check if we have four in a row
