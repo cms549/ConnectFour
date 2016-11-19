@@ -14,7 +14,7 @@
         android:layout_alignParentEnd="true"
         android:textColor="@android:color/black"
         android:textSize="28dp"
-        android:paddingRight="10dp"
+        android:paddingRight="20dp"
         android:id="@+id/name" />
 
     <ImageView

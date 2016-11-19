@@ -153,7 +153,7 @@ public class GameScreen extends AppCompatActivity {
         Random r = new Random();
         int pos =38;
         while(true){
-            pos=r.nextInt(42 - 0);
+            pos=r.nextInt(42 );
             Move m = boardAsList.get(pos);
             if(m.player==0){
                 int p2 = pos +7;

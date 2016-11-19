@@ -54,7 +54,9 @@ public class AccountScreen extends AppCompatActivity {
             return;
         }
         double wl = (w+0.0)/g;
-        wlratio.setText(""+wl);
+        int full = (int) wl;
+        int decimal = (int) ((wl-full)*1000);
+        wlratio.setText(""+full+"."+decimal);
 
 
     }
