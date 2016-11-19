@@ -1,6 +1,5 @@
 package cms549.connectfour;
 
-
 import android.util.Log;
 
 public class HardAI {
@@ -31,6 +30,10 @@ public class HardAI {
         if(board[5][4]==0){
             return 39;
         }
+        //go middle
+        if(possibleRow[3]!=-1){
+            return 3+possibleRow[3]*7;
+        }
 
         //check if you can get three in a row
         pos = canThree(board, possibleRow, -1);
@@ -41,11 +44,6 @@ public class HardAI {
         pos = canThree(board, possibleRow, 1);
         if(pos!=-1){
             return pos;
-        }
-        //go middle
-        if(possibleRow[3]!=-1){
-            Log.d("CHOOSING THE MIDDLE", "POS= "+3+possibleRow[3]*7);
-            return 3+possibleRow[3]*7;
         }
 
         //do whatever
@@ -59,108 +57,137 @@ public class HardAI {
 
     }
 
+    /**
+     * Returns the index of place you should go to get 3 in a row or block 3 in a row or -1 if no such place
+     */
     private static int canThree(int[][] board, int[] possibleRow, int color) {
         for(int col=0; col<7; col++){
             //if column is full skip it
             if(possibleRow[col]<0){
                 continue;
             }
-            board[possibleRow[col]][col]=color;
+            int row = possibleRow[col];
+            board[row][col]=color;
             //if you can win go here
-            if( inARow(board, color,3 ) ){
-                board[possibleRow[col]][col]=0;
-                return possibleRow[col]*6+col;
+            if( inARow(board, 3, row, col ) ){
+                board[row][col]=0;
+                return row*7+col;
             }
-            board[possibleRow[col]][col]=0;
+            board[row][col]=0;
         }
         return -1;
     }
 
-
+    /**
+     * Returns the index of place you should go to get 4 in a row or block 4 in a row or -1 if no such place
+     */
     private static int canWin(int[][] board, int[] possibleRow, int color){
         for(int col=0; col<7; col++){
             //if column is full skip it
             if(possibleRow[col]<0){
                 continue;
             }
-            board[possibleRow[col]][col]=color;
+            int row = possibleRow[col];
+            board[row][col]=color;
             //if you can win go here
-            if( inARow(board, color,4 ) ){
-                board[possibleRow[col]][col]=0;
-                return possibleRow[col]*6+col;
+            if( inARow(board, 4, row, col ) ){
+                board[row][col]=0;
+                return row*7+col;
             }
-            board[possibleRow[col]][col]=0;
+            board[row][col]=0;
         }
         return -1;
 
     }
 
-    private static boolean inARow(int[][] board, int m, int amt) {
-        //go through whole board and if you find inArow in a row return true
-        int inARow=0;
-        //go through each element and check right, up, up and right, and up and left
-        for(int row=0; row<board.length; row++){
-            for(int col=0; col<board[row].length; col++){
-                //count right
-                int currRow = row;
-                while(currRow<board.length && board[currRow][col]==m ){
-                    inARow++;
-                    currRow++;
-                }
-                if(inARow>=amt){
-                    return true;
-                }
-                inARow=0;
+    /**
+     * returns if the specified row and col is part of a in a row sequence of length amt
+     */
+    private static boolean inARow(int[][] board, int amt, int row, int col) {
+        int color = board[row][col];
 
-                //count up
-                int currCol = col;
-                while(currCol<board[0].length && board[row][currCol]==m ){
-                    inARow++;
-                    currCol++;
-                }
-                if(inARow>=amt){
-                    return true;
-                }
-                inARow=0;
+        int inARow=1;
+        //count down then up
+        int currRow = row+1;
+        while(currRow<board.length && board[currRow][col]==color ){
+            inARow++;
+            currRow++;
+        }
+        currRow = row-1;
+        while(currRow>-1 && board[currRow][col]==color ){
+            inARow++;
+            currRow--;
+        }
+        if(inARow>=amt){
+            return true;
+        }
 
-                //count up and right (diagonal)
-                currCol = col;
-                currRow = row;
-                while(currCol<board[0].length && currRow<board.length &&board[currRow][currCol]==m ){
-                    inARow++;
-                    currCol++;
-                    currRow++;
-                }
-                if(inARow>=amt){
-                    return true;
-                }
-                inARow=0;
+        //count right then left
+        inARow=1;
+        int currCol = col+1;
+        while(currCol<board[0].length && board[row][currCol]==color ){
+            inARow++;
+            currCol++;
+        }
+        currCol = col-1;
+        while(currCol>-1 && board[row][currCol]==color ){
+            inARow++;
+            currCol--;
+        }
+        if(inARow>=amt){
+            return true;
+        }
 
-                //count up and left (diagonal)
-                currCol = col;
-                currRow = row;
-                while(currCol<board[0].length && currRow>=0 && board[currRow][currCol]==m ){
-                    inARow++;
-                    currCol++;
-                    currRow--;
-                }
-                if(inARow>=amt){
-                    return true;
-                }
-                inARow=0;
-
-            }
+        //count down and right then up and left (diagonal)
+        inARow=1;
+        currCol = col+1;
+        currRow = row+1;
+        while(currCol<board[0].length && currRow<board.length &&board[currRow][currCol]==color ) {
+            inARow++;
+            currCol++;
+            currRow++;
+        }
+        currCol = col-1;
+        currRow = row-1;
+        while(currCol>-1 && currRow>-1 &&board[currRow][currCol]==color ){
+            inARow++;
+            currCol--;
+            currRow--;
+        }
+        if(inARow>=amt){
+            return true;
         }
 
 
+        inARow=0;
+        //count down and left then up and right (diagonal)
+        currCol = col+1;
+        currRow = row-1;
+        while(currCol<board[0].length && currRow>=0 && board[currRow][currCol]==color ){
+            inARow++;
+            currCol++;
+            currRow--;
+        }
+        currCol = col-1;
+        currRow = row+1;
+        while(currCol>-1 && currRow<board.length && board[currRow][currCol]==color ){
+            inARow++;
+            currCol--;
+            currRow++;
+        }
+        if(inARow>=amt){
+            return true;
+        }
+
         return false;
+
     }
 
 
     private static void findPossibleMoves(int[] possibleRow, int[][] board){
         for(int col=0; col<7; col++){
             possibleRow[col]=-1;
-            for(int row=0; row<6;row++){
+            for(int row=5; row>=0;row--){
                 if(board[row][col]==0){
                     possibleRow[col]= row;
                     break;

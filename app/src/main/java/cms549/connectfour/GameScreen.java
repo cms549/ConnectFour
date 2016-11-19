@@ -81,14 +81,21 @@ public class GameScreen extends AppCompatActivity {
                     movesMade++;
                     if(didWin(m)){
                         playerWins(1);
+                        return;
                     }
 
                     //computer go -> should pick between hard and easy
                     if(aiDif==1) {
-                        aiEasyMakeMove();
+                        Move m1 = aiEasyMakeMove();
+                        if(didWin(m1)){
+                            playerWins(-1);
+                        }
                     }
                     else{
-                        aiHardMakeMove();
+                        Move m1 =aiHardMakeMove();
+                        if(didWin(m1)){
+                            playerWins(-1);
+                        }
                     }
                     movesMade++;
 
@@ -102,6 +109,7 @@ public class GameScreen extends AppCompatActivity {
                         tvturn.setText("Player 2's Turn:");
                         if(didWin(m)){
                             playerWins(1);
+                            return;
                         }
                         turn=turn*-1;
                     }
@@ -114,19 +122,21 @@ public class GameScreen extends AppCompatActivity {
                         tvturn.setText("Player 1's Turn:");
                         if(didWin(m)){
                             playerWins(2);
+                            return;
                         }
                         turn=turn*-1;
                     }
                 }
                 if(movesMade>=42){
                     playerWins(0);
+                    return;
                 }
 
             }
         });
     }
 
-    private void aiHardMakeMove() {
+    private Move aiHardMakeMove() {
         int pos = HardAI.makemove(board);
         Move m = boardAsList.get(pos);
         board[m.row][m.col] = -1;
@@ -134,14 +144,12 @@ public class GameScreen extends AppCompatActivity {
         m.picID = p2color;
         View v=gvboard.getChildAt(pos);
         v.setBackground(getDrawable(m.picID));
-        if(didWin(m)){
-            playerWins(-1);
-        }
-        return;
+
+        return m;
 
     }
 
-    private void aiEasyMakeMove() {
+    private Move aiEasyMakeMove() {
         Random r = new Random();
         int pos =38;
         while(true){
@@ -152,14 +160,10 @@ public class GameScreen extends AppCompatActivity {
                 //check row below it
                 if(p2>= 42 || boardAsList.get(p2).player!=0){
                     m.player =-1;
-                    board[m.row][m.col] = -1;
                     m.picID = p2color;
                     View v=gvboard.getChildAt(pos);
                     v.setBackground(getDrawable(m.picID));
-                    if(didWin(m)){
-                        playerWins(-1);
-                    }
-                    return;
+                    return m;
                 }
             }
         }
@@ -244,7 +248,7 @@ public class GameScreen extends AppCompatActivity {
 
             editor.commit();
         }
-        if(i==0){
+        else if(i==0){
             t.setText("It's a Tie.");
             editor.putInt("games",myPref.getInt("games",0)+1);
             editor.putInt("ties",myPref.getInt("ties",0)+1);
