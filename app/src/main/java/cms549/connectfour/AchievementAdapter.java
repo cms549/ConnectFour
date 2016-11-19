@@ -37,6 +37,7 @@ public class AchievementAdapter extends ArrayAdapter<Achievement> {
 
             if (t != null) {
                 TextView name = (TextView) v.findViewById(R.id.name);
+
                 TextView desc = (TextView) v.findViewById(R.id.desc);
                 ImageView img = (ImageView) v.findViewById(R.id.chip);
 
