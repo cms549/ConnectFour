@@ -25,8 +25,8 @@
         android:id="@+id/img"
         android:adjustViewBounds="true"
         android:paddingTop="0dp"
-        android:paddingLeft="150dp"
-        android:paddingRight="180dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="220dp"
 
         android:cropToPadding="true"
         android:layout_alignParentRight="false"

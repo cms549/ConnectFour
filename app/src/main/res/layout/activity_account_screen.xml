@@ -19,110 +19,113 @@
         android:textColor="@android:color/black"
         android:layout_alignParentStart="true" />
 
-    <LinearLayout
-        android:layout_below="@id/tvname"
-        android:padding="10dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:text="Score:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView5"
-            android:textSize="25dp"
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:text="10"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <TextView
+            android:layout_height="50dp"
+           android:text="10"
             android:id="@+id/scoretv"
             android:textColor="@android:color/white"
             android:textSize="24sp"
-            android:textStyle="normal|bold" />
+            android:textStyle="normal|bold"
+            android:layout_alignBaseline="@+id/textView5"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignParentEnd="true"
+            android:layout_width="50dp" />
 
         <TextView
-            android:text="Games:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:textSize="25dp"
+            android:text="Games"
+           android:layout_width="100dp"
+            android:layout_height="50dp"
+    android:textSize="25dp"
             android:textColor="@android:color/black"
+            android:id="@+id/textView3"
+            android:layout_alignBaseline="@+id/gamestv"
+            android:layout_alignBottom="@+id/gamestv"
             android:layout_alignParentStart="true" />
 
         <TextView
             android:text="10"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/gamestv"
+    android:layout_width="50dp"
+            android:layout_height="50dp"
             android:textColor="@android:color/white"
             android:textSize="24sp"
-            android:textStyle="normal|bold" />
+            android:id="@+id/gamestv"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/scoretv"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:text="Score"
+            android:id="@+id/textView5"
+            android:textSize="25dp"
+            android:textColor="@android:color/black"
+            android:layout_height="50dp"
+            android:layout_marginTop="13dp"
+            android:layout_below="@+id/tvname"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:text="Wins/Ties/Losses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
+            android:layout_height="50dp"
+            android:layout_below="@+id/gamestv"
+            android:layout_alignParentStart="true"
+            android:textColor="@android:color/black"
             android:textSize="25dp"
-            android:textColor="@android:color/black" />
-
+            android:id="@+id/textView6"
+            android:layout_width="250dp" />
 
         <TextView
             android:text="5/0/5"
+            android:layout_height="50dp"
+            android:layout_below="@+id/gamestv"
+            android:layout_alignParentEnd="true"
             android:textColor="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/winstv"
-            android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="normal|bold" />
-
-
-
-        <TextView
-            android:text="Winning Ratio:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:textSize="25dp"
-            android:textColor="@android:color/black" />
+            android:id="@+id/winstv"
+            android:textStyle="normal|bold"
+            android:layout_width="95dp" />
 
         <TextView
             android:text="1.0"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/wltv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/winstv"
             android:textColor="@android:color/white"
             android:textSize="24sp"
-            android:textStyle="normal|bold" />
+            android:textStyle="normal|bold"
+            android:id="@+id/wltv"
+            android:layout_alignStart="@+id/gamestv" />
 
         <TextView
-            android:text="Streak:"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv6"
+            android:text="Winning Ratio"
+            android:layout_height="50dp"
+            android:textColor="@android:color/black"
             android:textSize="25dp"
-            android:textColor="@android:color/black" />
+            android:id="@+id/textView11"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentStart="true"
+            android:layout_width="200dp" />
+
+        <TextView
+            android:text="Streak"
+           android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:textColor="@android:color/black"
+            android:textSize="25dp"
+            android:id="@+id/textView13"
+            android:layout_below="@+id/textView11"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:text="10"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/streaktv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:textColor="@android:color/white"
             android:textSize="24sp"
-            android:textStyle="normal|bold" />
-
-    </LinearLayout>
-
+            android:textStyle="normal|bold"
+            android:id="@+id/streaktv"
+            android:layout_below="@+id/wltv"
+            android:layout_alignParentEnd="true" />
 
 
 
